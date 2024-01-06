@@ -32,9 +32,13 @@ def show_page():
 
     button = st.button('محاسبه و پیش بینی')
     if button:
-        x = np.array([[SPX, USO, SLV, EUR_USD]])
+        with st.chat_message("assistant"):
+                with st.spinner('''درحال بررسی، لطفا صبور باشید'''):
+                    time.sleep(3)
+                    st.success(u'\u2713''انجام شد')
+                    x = np.array([[SPX, USO, SLV, EUR_USD]])
 
         prediction = model.predict(x)
-        st.write("<h4 style='text-align: center; color: gray;'>:بر اساس داده های وارد شده، قیمت طلا به دلار برابر خواهد بود با</h4>", unsafe_allow_html=True)
+        st.write("<h4 style='text-align: right; color: gray;'>:بر اساس داده های وارد شده، قیمت طلا به دلار برابر خواهد بود با</h4>", unsafe_allow_html=True)
         st.subheader(prediction[0])
 show_page()
